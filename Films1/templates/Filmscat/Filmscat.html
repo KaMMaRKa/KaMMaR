@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ filmscat }}</title>
+</head>
+<body>
+<h1>{{filmscat}}</h1>
+       {{description}}
+    <div>
+        {% for films in films %}
+        <a href = "{{films}}">{{films}}</a>
+        {% endfor %}
+    </div>
+</body>
+</html>
