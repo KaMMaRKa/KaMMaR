@@ -3,21 +3,30 @@ from django.template.loader import render_to_string
 from django.shortcuts import render
 
 filmscat = {
-	'horror': 'horror',
-	'comedy': 'comedy',
-	'romantic': 'romantic',
+	'horror': 'Хоррор - это жанр для тех кто любит страшилки, '
+			  'кому нужно пострашнее',
+	'comedy': 'Комедия - это жанр для тех, кто любит посмеяться,'
+			  'кто хочет посмотреть что-то легкое',
+	'romantic': 'Романтика - это жанр для тех, кто ценит любовные линии,'
+				'кому важны история и сюжет'
 }
 
 
+def getmainpage(request):
+	data = {
+		'filmscat':filmscat.keys()
+	}
+	return render(request, 'Filmscat/Filmscat.html', context = data)
 def getFilmscat(request, name):
 
-	data={
-		'filmscat':name,
-		'description':filmscat[name]
-	}
+
 
 	if filmscat.get(name):
-		return render(request,'Filmscat/Filmscat.html',context=data)
+		data = {
+			'filmscat': name,
+			'description': filmscat[name]
+		}
+		return render(request,'Filmscat/Films.html',context=data)
 	else:
 		return HttpResponseRedirect('404')
 def getFilms(request, name):
@@ -26,4 +35,4 @@ def getFilms(request, name):
 	}
 	return render(request, 'Filmscat/Films.html', context = data)
 def getNotFound(request):
-	return HttpResponseNotFound('Not founds')
+	return HttpResponseNotFound('<h1>Not founds</h1>')
